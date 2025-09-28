@@ -5,9 +5,10 @@ a = torch.rand(size=(3,4))
 
 # Reshaping it to required dimensions
 b = torch.reshape(a,shape=(2,6))
+assert(b.shape == (2,6))
 
 # moving to gpu if available
-device = "mps" if torch.backends.mps.is_available() else "cpu"
+device = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
 b = b.to(device=device)
 print(b.device)
 
