@@ -29,10 +29,10 @@ b = b*2
 c = torch.arange(0,25)
 d = torch.reshape(c,shape=(5,5))
 d = d.to("mps")
-print(d.device)
-print(d.shape)
-print(d.dtype)
-print(d[0,:5])
+# print(d.device)
+# print(d.shape)
+# print(d.dtype)
+# print(d[0,:5])
 
 
 '''
@@ -45,3 +45,8 @@ Difference between torch.linspace and torch.arange
 - Defines the step value between start and end intervals, basically used as a loop
 - torch.linspace(start,end,step_size)
 '''
+
+device = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
+x = torch.arange(0,25,1).reshape(5,5).mul(2).to(device)
+print(x.dtype, x.shape, x.device)
+print(f"First 5 elements: {x[0,:5]}")
